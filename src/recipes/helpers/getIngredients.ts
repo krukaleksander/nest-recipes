@@ -1,9 +1,9 @@
-import { Ingredient, Recipe } from '../../interfaces';
+import { Ingredient, IRecipe } from '../../interfaces';
 
-export function getIngredients(MockDB: Recipe[], key: string) {
+export function getIngredients(MockDB: IRecipe[], key: string) {
   const db = MockDB;
   const arrOfAllIngredients: string[] = [];
-  db.forEach((recipe: Recipe) => {
+  db.forEach((recipe: IRecipe) => {
     const { ingredients } = recipe;
     ingredients.forEach((ingredient: Ingredient) =>
       arrOfAllIngredients.push(ingredient[key]),

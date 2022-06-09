@@ -1,4 +1,4 @@
-export interface Recipe {
+export interface IRecipe {
   name: string;
   ingredients: Ingredient[];
   steps: string[];
@@ -11,4 +11,9 @@ export interface Ingredient {
   quantity: string;
   name: string;
   type: string;
+}
+
+export interface IPagination {
+  limit: string;
+  page: string;
 }

@@ -1,6 +1,6 @@
-import { Recipe } from '../interfaces';
+import { IRecipe } from '../interfaces';
 
-export const MockDB: Recipe[] = [
+export const MockDB: IRecipe[] = [
   {
     name: 'Crock Pot Roast',
     ingredients: [

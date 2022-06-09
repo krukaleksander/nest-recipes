@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { MockDB } from '../helpers/MockDB';
 import { getIngredients } from './helpers/getIngredients';
-import { Recipe } from '../interfaces';
+import { IRecipe } from '../interfaces';
 
 @Injectable()
 export class RecipesService {
@@ -13,7 +13,7 @@ export class RecipesService {
     return getIngredients(MockDB, 'type');
   }
 
-  getAllRecipes(): Recipe[] {
+  getAllRecipes(): IRecipe[] {
     return MockDB;
   }
 }
