@@ -112,5 +112,9 @@ describe('Recipes (e2e)', () => {
       const { body: response } = await getFromServer(endpoint, { time: 6 });
       expect(response).toHaveLength(1);
     });
+    it('should return five recipes if time is 60', async () => {
+      const { body: response } = await getFromServer(endpoint, { time: 60 });
+      expect(response).toHaveLength(5);
+    });
   });
 });
