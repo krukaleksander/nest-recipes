@@ -43,5 +43,9 @@ describe('Recipes (e2e)', () => {
       const { body: response } = await getFromServer(endpoint);
       expect(response).toEqual(expect.arrayContaining([expect.any(String)]));
     });
+    it('should return array of unique strings', async () => {
+      const { body: response } = await getFromServer(endpoint);
+      expect(new Set(response).size === response.length).toBe(true);
+    });
   });
 });
