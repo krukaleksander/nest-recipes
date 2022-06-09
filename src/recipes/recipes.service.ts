@@ -1,16 +1,10 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { MockDB } from '../helpers/MockDB';
 import { getIngredients } from './helpers/getIngredients';
 import { IPagination, IRecipe } from '../interfaces';
 import { getRecipes } from './helpers/getRecipes';
 import { getRecipesDoNotExceed } from './helpers/getRecipesDoNotExceed';
-
-function getRecipeByID(id: number): IRecipe[] | HttpException {
-  const result = MockDB.filter((recipe: IRecipe) => recipe.id === id);
-  if (result.length < 1)
-    throw new HttpException('No content', HttpStatus.NO_CONTENT);
-  return result;
-}
+import { getRecipeByID } from './helpers/getRecipeByID';
 
 @Injectable()
 export class RecipesService {
