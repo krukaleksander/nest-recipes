@@ -3,6 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { RecipesModule } from '../src/recipes/recipes.module';
 import * as superagent from 'superagent';
+import { MockDB } from '../src/helpers/MockDB';
 
 describe('Recipes (e2e)', () => {
   let app: INestApplication;
@@ -83,6 +84,10 @@ describe('Recipes (e2e)', () => {
         statusCode: 400,
         message: 'page out of range',
       });
+    });
+    it('should return elements at index 4 and 5 if limit 2 and page 3', async () => {
+      const response = await getFromServer(`${endpoint}?limit=2&page=3`);
+      expect(response.body).toEqual(MockDB.slice(4, 6));
     });
   });
 });
