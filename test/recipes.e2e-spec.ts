@@ -99,5 +99,11 @@ describe('Recipes (e2e)', () => {
     it('should return status 200', () => {
       return request(app.getHttpServer()).get(endpoint).expect(200);
     });
+    it('should return  empty array if 0 time is passed', () => {
+      return request(app.getHttpServer())
+        .get(endpoint)
+        .send({ time: 0 })
+        .expect([]);
+    });
   });
 });
