@@ -70,5 +70,12 @@ describe('Recipes (e2e)', () => {
       const { body: response } = await getFromServer(`${endpoint}?limit=3`);
       expect(response).toHaveLength(3);
     });
+    it('should return limit out of range if limit is bigger than database length', async () => {
+      const response = await getFromServer(`${endpoint}?limit=100`);
+      expect(response.body).toEqual({
+        statusCode: 400,
+        message: 'limit out of range',
+      });
+    });
   });
 });
