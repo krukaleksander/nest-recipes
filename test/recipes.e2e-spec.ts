@@ -94,4 +94,10 @@ describe('Recipes (e2e)', () => {
       expect(response.body).toEqual(MockDB.slice(4, 8));
     });
   });
+  describe('/recipes/time (GET)', () => {
+    const endpoint = '/recipes/time';
+    it('should return status 200', () => {
+      return request(app.getHttpServer()).get(endpoint).expect(200);
+    });
+  });
 });
