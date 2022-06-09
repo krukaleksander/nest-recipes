@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { MockDB } from '../helpers/MockDB';
 import { getIngredients } from './helpers/getIngredients';
 import { IPagination, IRecipe } from '../interfaces';
@@ -18,6 +18,13 @@ function getRecipesDoNotExceed(time: number, recipes: IRecipe[]): IRecipe[] {
       result.push(recipe);
     }
   });
+  return result;
+}
+
+function getRecipeByID(id: number): IRecipe[] | HttpException {
+  const result = MockDB.filter((recipe: IRecipe) => recipe.id === id);
+  if (result.length < 1)
+    throw new HttpException('No content', HttpStatus.NO_CONTENT);
   return result;
 }
 
@@ -41,8 +48,8 @@ export class RecipesService {
     return getRecipesDoNotExceed(time, MockDB);
   }
 
-  getSingleRecipe(body): IRecipe[] {
+  getSingleRecipe(body): IRecipe[] | HttpException {
     const { id } = body;
-    return MockDB.filter((recipe: IRecipe) => recipe.id === id);
+    return getRecipeByID(id);
   }
 }
