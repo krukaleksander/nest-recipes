@@ -1,11 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { MockDB } from '../helpers/MockDB';
 import { getIngredients } from './helpers/getIngredients';
 import { IPagination, IRecipe } from '../interfaces';
 
 function getRecipes(limit, page, database) {
+  const limitNumber = +limit;
   if (!limit && !page) return database;
-  if (limit && !page) return database.slice(0, +limit);
+  if (limitNumber > database.length)
+    throw new HttpException('limit out of range', HttpStatus.BAD_REQUEST);
+  if (limit && !page) return database.slice(0, limitNumber);
 }
 
 @Injectable()
