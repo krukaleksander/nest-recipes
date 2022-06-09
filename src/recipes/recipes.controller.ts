@@ -8,4 +8,8 @@ export class RecipesController {
   getListOfUniqueIngredients(): string[] {
     return this.recipesService.getListOfUniqueIngredients();
   }
+  @Get('/ingredients/types')
+  getListOfIngredientsTypes(): string[] {
+    return this.recipesService.getListOfIngredientsTypes();
+  }
 }
