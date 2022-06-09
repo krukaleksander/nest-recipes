@@ -117,4 +117,10 @@ describe('Recipes (e2e)', () => {
       expect(response).toHaveLength(5);
     });
   });
+  describe('/recipes/single (GET)', () => {
+    const endpoint = '/recipes/single';
+    it('should return status 200', () => {
+      return request(app.getHttpServer()).get(endpoint).expect(200);
+    });
+  });
 });
