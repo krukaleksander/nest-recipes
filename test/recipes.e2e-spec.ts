@@ -61,4 +61,10 @@ describe('Recipes (e2e)', () => {
       expect(response).toEqual(ingredientsTypes);
     });
   });
+  describe('/recipes', () => {
+    const endpoint = '/recipes';
+    it('should return status 200', () => {
+      return request(app.getHttpServer()).get(endpoint).expect(200);
+    });
+  });
 });
