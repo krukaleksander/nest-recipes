@@ -34,4 +34,10 @@ describe('Recipes (e2e)', () => {
       expect(new Set(response).size === response.length).toBe(true);
     });
   });
+  describe('/recipes/ingredients/types (GET)', () => {
+    const endpoint = '/recipes/ingredients/types';
+    it('should return status 200', () => {
+      return request(app.getHttpServer()).get(endpoint).expect(200);
+    });
+  });
 });
