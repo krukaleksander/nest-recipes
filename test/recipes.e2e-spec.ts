@@ -89,5 +89,9 @@ describe('Recipes (e2e)', () => {
       const response = await getFromServer(`${endpoint}?limit=2&page=3`);
       expect(response.body).toEqual(MockDB.slice(4, 6));
     });
+    it('should return elements at index 4, 5, 6 and 7 if limit 4 and page 2', async () => {
+      const response = await getFromServer(`${endpoint}?limit=4&page=2`);
+      expect(response.body).toEqual(MockDB.slice(4, 8));
+    });
   });
 });
