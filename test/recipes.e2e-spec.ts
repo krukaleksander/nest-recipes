@@ -108,5 +108,9 @@ describe('Recipes (e2e)', () => {
         .send({ time: 0 })
         .expect([]);
     });
+    it('should return one recipe if time is 6', async () => {
+      const { body: response } = await getFromServer(endpoint, { time: 6 });
+      expect(response).toHaveLength(1);
+    });
   });
 });
