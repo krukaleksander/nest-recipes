@@ -14,8 +14,11 @@ describe('Recipes (e2e)', () => {
     app = moduleFixture.createNestApplication();
     await app.init();
   });
-
-  it('/recipes/ingredients (GET)', () => {
-    return request(app.getHttpServer()).get('/recipes/ingredients').expect(200);
+  describe('/recipes/ingredients (GET)', () => {
+    it('should return status 200', () => {
+      return request(app.getHttpServer())
+        .get('/recipes/ingredients')
+        .expect(200);
+    });
   });
 });
