@@ -4,6 +4,23 @@ import { getIngredients } from './helpers/getIngredients';
 import { IPagination, IRecipe } from '../interfaces';
 import { getRecipes } from './helpers/getRecipes';
 
+function sumTheArray(arr: number[]): number {
+  return arr.reduce(
+    (previousValue, currentValue) => (currentValue += previousValue),
+    0,
+  );
+}
+
+function getRecipesDoNotExceed(time: number, recipes: IRecipe[]): IRecipe[] {
+  const result = [];
+  recipes.forEach((recipe: IRecipe) => {
+    if (sumTheArray(recipe.timers) <= time) {
+      result.push(recipe);
+    }
+  });
+  return result;
+}
+
 @Injectable()
 export class RecipesService {
   getListOfUniqueIngredients(): string[] {
@@ -20,6 +37,7 @@ export class RecipesService {
   }
 
   getRecipesByTime(body): IRecipe[] {
-    return MockDB;
+    const { time } = body;
+    return getRecipesDoNotExceed(time, MockDB);
   }
 }
