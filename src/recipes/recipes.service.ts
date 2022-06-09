@@ -3,17 +3,7 @@ import { MockDB } from '../helpers/MockDB';
 import { getIngredients } from './helpers/getIngredients';
 import { IPagination, IRecipe } from '../interfaces';
 import { getRecipes } from './helpers/getRecipes';
-import { sumTheArray } from './helpers/sumTheArray';
-
-function getRecipesDoNotExceed(time: number, recipes: IRecipe[]): IRecipe[] {
-  const result = [];
-  recipes.forEach((recipe: IRecipe) => {
-    if (sumTheArray(recipe.timers) <= time) {
-      result.push(recipe);
-    }
-  });
-  return result;
-}
+import { getRecipesDoNotExceed } from './helpers/getRecipesDoNotExceed';
 
 function getRecipeByID(id: number): IRecipe[] | HttpException {
   const result = MockDB.filter((recipe: IRecipe) => recipe.id === id);
