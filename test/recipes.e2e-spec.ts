@@ -119,12 +119,16 @@ describe('Recipes (e2e)', () => {
   });
   describe('/recipes/single (GET)', () => {
     const endpoint = '/recipes/single';
-    it('should return status 200', () => {
-      return request(app.getHttpServer()).get(endpoint).expect(200);
+    it('should return status 204, without any id', () => {
+      return request(app.getHttpServer()).get(endpoint).expect(204);
     });
     it('should return one element if valid id is passed', async () => {
       const { body: response } = await getFromServer(endpoint, { id: 0 });
       expect(response).toHaveLength(1);
+    });
+    it('should return 204 no content if id is not in db', async () => {
+      const response = await getFromServer(endpoint, { id: 999 });
+      expect(response.statusCode).toEqual(204);
     });
   });
 });
