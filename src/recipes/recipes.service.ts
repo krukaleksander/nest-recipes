@@ -41,7 +41,8 @@ export class RecipesService {
     return getRecipesDoNotExceed(time, MockDB);
   }
 
-  getSingleRecipe(body): IRecipe {
-    return MockDB[0];
+  getSingleRecipe(body): IRecipe[] {
+    const { id } = body;
+    return MockDB.filter((recipe: IRecipe) => recipe.id === id);
   }
 }

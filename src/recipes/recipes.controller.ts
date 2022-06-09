@@ -22,7 +22,7 @@ export class RecipesController {
     return this.recipesService.getRecipesByTime(body);
   }
   @Get('/single')
-  getSingleRecipe(@Body() body): IRecipe {
+  getSingleRecipe(@Body() body): IRecipe[] {
     return this.recipesService.getSingleRecipe(body);
   }
 }
