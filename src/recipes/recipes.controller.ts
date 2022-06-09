@@ -1,4 +1,11 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
+import { RecipesService } from './recipes.service';
 
 @Controller('recipes')
-export class RecipesController {}
+export class RecipesController {
+  constructor(private readonly recipesService: RecipesService) {}
+  @Get('/ingredients')
+  getListOfUniqueIngredients(): string[] {
+    return this.recipesService.getListOfUniqueIngredients();
+  }
+}
