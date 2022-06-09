@@ -61,10 +61,14 @@ describe('Recipes (e2e)', () => {
       expect(response).toEqual(ingredientsTypes);
     });
   });
-  describe('/recipes', () => {
+  describe('/recipes (GET)', () => {
     const endpoint = '/recipes';
     it('should return status 200', () => {
       return request(app.getHttpServer()).get(endpoint).expect(200);
+    });
+    it('should return 3 recipes if limit is set to 3', async () => {
+      const { body: response } = await getFromServer(`${endpoint}?limit=3`);
+      expect(response).toHaveLength(3);
     });
   });
 });
