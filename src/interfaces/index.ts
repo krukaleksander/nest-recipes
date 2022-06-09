@@ -10,15 +10,5 @@ export interface Recipe {
 export interface Ingredient {
   quantity: string;
   name: string;
-  type: DishType;
-}
-
-export enum DishType {
-  Baking = 'Baking',
-  Condiments = 'Condiments',
-  Dairy = 'Dairy',
-  Drinks = 'Drinks',
-  Meat = 'Meat',
-  Misc = 'Misc',
-  Produce = 'Produce',
+  type: string;
 }
