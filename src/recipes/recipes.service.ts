@@ -40,4 +40,8 @@ export class RecipesService {
     const { time } = body;
     return getRecipesDoNotExceed(time, MockDB);
   }
+
+  getSingleRecipe(body): IRecipe {
+    return MockDB[0];
+  }
 }
