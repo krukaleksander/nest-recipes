@@ -3,13 +3,7 @@ import { MockDB } from '../helpers/MockDB';
 import { getIngredients } from './helpers/getIngredients';
 import { IPagination, IRecipe } from '../interfaces';
 import { getRecipes } from './helpers/getRecipes';
-
-function sumTheArray(arr: number[]): number {
-  return arr.reduce(
-    (previousValue, currentValue) => (currentValue += previousValue),
-    0,
-  );
-}
+import { sumTheArray } from './helpers/sumTheArray';
 
 function getRecipesDoNotExceed(time: number, recipes: IRecipe[]): IRecipe[] {
   const result = [];
