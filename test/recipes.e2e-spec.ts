@@ -39,5 +39,9 @@ describe('Recipes (e2e)', () => {
     it('should return status 200', () => {
       return request(app.getHttpServer()).get(endpoint).expect(200);
     });
+    it('should return array of strings', async () => {
+      const { body: response } = await getFromServer(endpoint);
+      expect(response).toEqual(expect.arrayContaining([expect.any(String)]));
+    });
   });
 });
