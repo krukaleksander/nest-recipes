@@ -77,5 +77,12 @@ describe('Recipes (e2e)', () => {
         message: 'limit out of range',
       });
     });
+    it('should throw page out of range if there are no more pages in current limit', async () => {
+      const response = await getFromServer(`${endpoint}?limit=9&page=2`);
+      expect(response.body).toEqual({
+        statusCode: 400,
+        message: 'page out of range',
+      });
+    });
   });
 });
