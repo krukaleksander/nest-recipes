@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, HttpException, Query } from '@nestjs/common';
 import { RecipesService } from './recipes.service';
 import { IPagination, IRecipe } from '../interfaces';
 
@@ -14,7 +14,7 @@ export class RecipesController {
     return this.recipesService.getListOfIngredientsTypes();
   }
   @Get('/')
-  getAllRecipes(@Query() query: IPagination): IRecipe[] {
+  getAllRecipes(@Query() query: IPagination): IRecipe[] | HttpException {
     return this.recipesService.getAllRecipes(query);
   }
 }
