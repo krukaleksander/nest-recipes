@@ -18,4 +18,8 @@ export class RecipesService {
     const { limit, page } = query;
     return getRecipes(limit, page, MockDB);
   }
+
+  getRecipesByTime(body): IRecipe[] {
+    return MockDB;
+  }
 }
