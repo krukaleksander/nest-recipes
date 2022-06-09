@@ -7,7 +7,10 @@ import { MockDB } from '../src/helpers/MockDB';
 
 describe('Recipes (e2e)', () => {
   let app: INestApplication;
-  let getFromServer: (endpoint: string) => Promise<superagent.Response>;
+  let getFromServer: (
+    endpoint: string,
+    body?: Record<string, unknown>,
+  ) => Promise<superagent.Response>;
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [RecipesModule],
@@ -17,8 +20,8 @@ describe('Recipes (e2e)', () => {
     await app.init();
   });
   beforeAll(function createCustomMethods() {
-    getFromServer = async (endpoint) => {
-      return request(app.getHttpServer()).get(endpoint);
+    getFromServer = async (endpoint, body?) => {
+      return request(app.getHttpServer()).get(endpoint).send(body);
     };
   });
   describe('/recipes/ingredients (GET)', () => {
