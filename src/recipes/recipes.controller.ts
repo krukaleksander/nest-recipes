@@ -1,5 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { RecipesService } from './recipes.service';
+import { Recipe } from '../interfaces';
 
 @Controller('recipes')
 export class RecipesController {
@@ -11,5 +12,9 @@ export class RecipesController {
   @Get('/ingredients/types')
   getListOfIngredientsTypes(): string[] {
     return this.recipesService.getListOfIngredientsTypes();
+  }
+  @Get('/')
+  getAllRecipes(): Recipe[] {
+    return this.recipesService.getAllRecipes();
   }
 }
