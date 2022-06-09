@@ -36,6 +36,15 @@ describe('Recipes (e2e)', () => {
   });
   describe('/recipes/ingredients/types (GET)', () => {
     const endpoint = '/recipes/ingredients/types';
+    const ingredientsTypes = [
+      'Meat',
+      'Baking',
+      'Condiments',
+      'Drinks',
+      'Produce',
+      'Misc',
+      'Dairy',
+    ];
     it('should return status 200', () => {
       return request(app.getHttpServer()).get(endpoint).expect(200);
     });
@@ -46,6 +55,10 @@ describe('Recipes (e2e)', () => {
     it('should return array of unique strings', async () => {
       const { body: response } = await getFromServer(endpoint);
       expect(new Set(response).size === response.length).toBe(true);
+    });
+    it('should match array of ingredient types', async () => {
+      const { body: response } = await getFromServer(endpoint);
+      expect(response).toEqual(ingredientsTypes);
     });
   });
 });
