@@ -26,10 +26,12 @@ describe('Recipes (e2e)', () => {
       return request(app.getHttpServer()).get(endpoint).expect(200);
     });
     it('should return array of strings', async () => {
-      const response = await getFromServer(endpoint);
-      expect(response.body).toEqual(
-        expect.arrayContaining([expect.any(String)]),
-      );
+      const { body: response } = await getFromServer(endpoint);
+      expect(response).toEqual(expect.arrayContaining([expect.any(String)]));
+    });
+    it('should return array of unique strings', async () => {
+      const { body: response } = await getFromServer(endpoint);
+      expect(new Set(response).size === response.length).toBe(true);
     });
   });
 });
