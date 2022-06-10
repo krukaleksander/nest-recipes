@@ -12,9 +12,9 @@ model Recipe {
   name     String
   ingredients     Ingredient[]
   steps String[]
-  timers Number[]
+  timers Int[]
   imageURL String
-  originalURL String
+  originalURL String?
 }
 
 model Ingredient {
