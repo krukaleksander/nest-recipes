@@ -1,11 +1,27 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+model Recipe {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  ingredients     Ingredient[]
+  steps String[]
+  timers Number[]
+  imageURL String
+  originalURL String
+}
+
+model Ingredient {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  recipe    Recipe   @relation(fields: [recipeId], references: [id])
+  recipeId  String @db.ObjectId
+  quantity String
+  name String
+  type String
 }
