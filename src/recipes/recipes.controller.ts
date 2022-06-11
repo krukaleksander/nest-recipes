@@ -6,11 +6,11 @@ import { IPagination, IRecipe } from '../interfaces';
 export class RecipesController {
   constructor(private readonly recipesService: RecipesService) {}
   @Get('/ingredients')
-  getListOfUniqueIngredients(): string[] {
+  getListOfUniqueIngredients(): Promise<string[]> {
     return this.recipesService.getListOfUniqueIngredients();
   }
   @Get('/ingredients/types')
-  getListOfIngredientsTypes(): string[] {
+  getListOfIngredientsTypes(): Promise<string[]> {
     return this.recipesService.getListOfIngredientsTypes();
   }
   @Get('/')
