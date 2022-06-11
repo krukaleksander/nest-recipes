@@ -2,7 +2,6 @@ import { IRecipe } from '../interfaces';
 
 export const MockDB: IRecipe[] = [
   {
-    id: 0,
     name: 'Crock Pot Roast',
     ingredients: [
       {
@@ -43,7 +42,6 @@ export const MockDB: IRecipe[] = [
     originalURL: 'http://www.food.com/recipe/to-die-for-crock-pot-roast-27208',
   },
   {
-    id: 1,
     name: 'Roasted Asparagus',
     ingredients: [
       {
@@ -80,7 +78,6 @@ export const MockDB: IRecipe[] = [
     originalURL: 'http://www.food.com/recipe/roasted-asparagus-50847',
   },
   {
-    id: 2,
     name: 'Curried Lentils and Rice',
     ingredients: [
       {
@@ -121,7 +118,6 @@ export const MockDB: IRecipe[] = [
       'http://dagzhsfg97k4.cloudfront.net/wp-content/uploads/2012/05/lentils3.jpg',
   },
   {
-    id: 3,
     name: 'Big Night Pizza',
     ingredients: [
       {
@@ -179,7 +175,6 @@ export const MockDB: IRecipe[] = [
       'http://upload.wikimedia.org/wikipedia/commons/c/c7/Spinach_pizza.jpg',
   },
   {
-    id: 4,
     name: 'Cranberry and Apple Stuffed Acorn Squash Recipe',
     ingredients: [
       {
@@ -229,7 +224,6 @@ export const MockDB: IRecipe[] = [
     originalURL: '',
   },
   {
-    id: 5,
     name: "Mic's Yorkshire Puds",
     ingredients: [
       {
@@ -271,7 +265,6 @@ export const MockDB: IRecipe[] = [
       'http://upload.wikimedia.org/wikipedia/commons/f/f9/Yorkshire_Pudding.jpg',
   },
   {
-    id: 6,
     name: 'Old-Fashioned Oatmeal Cookies',
     ingredients: [
       {
@@ -353,7 +346,6 @@ export const MockDB: IRecipe[] = [
     originalURL: '#',
   },
   {
-    id: 7,
     name: 'Blueberry Oatmeal Squares',
     ingredients: [
       {
@@ -424,7 +416,6 @@ export const MockDB: IRecipe[] = [
       'http://www.canadianliving.com/food/blueberry_oatmeal_squares.php',
   },
   {
-    id: 8,
     name: 'Curried chicken salad',
     ingredients: [
       {

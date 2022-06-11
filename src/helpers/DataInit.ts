@@ -13,9 +13,9 @@ export class DataInitService implements OnApplicationBootstrap {
     console.log('app is starting');
     try {
       await Promise.all(
-        MockDB.map(
-          async (recipe: IRecipe) => await this.recipeRepository.save(recipe),
-        ),
+        MockDB.map(async (recipe: IRecipe) => {
+          await this.recipeRepository.save(recipe);
+        }),
       );
       await this.recipeRepository.save(MockDB[0]);
     } catch (error) {
