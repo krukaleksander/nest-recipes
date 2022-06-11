@@ -1,5 +1,4 @@
 import { HttpException, Inject, Injectable } from '@nestjs/common';
-import { MockDB } from '../helpers/MockDB';
 import { Repository } from 'typeorm';
 import { Recipe } from '../database/entities/Recipe.entity';
 import { getIngredients } from './helpers/getIngredients';
@@ -50,9 +49,17 @@ export class RecipesService {
     return getRecipes(limit, page, recipes);
   }
 
-  getRecipesByTime(body): IRecipe[] {
+  async getRecipesByTime(body): Promise<IRecipe[]> {
     const { time } = body;
-    return getRecipesDoNotExceed(time, MockDB);
+    let recipes;
+    try {
+      recipes = await this.recipeRepository.find({
+        relations: ['ingredients'],
+      });
+    } catch (error) {
+      throw error;
+    }
+    return getRecipesDoNotExceed(time, recipes);
   }
 
   getSingleRecipe(body): IRecipe[] | HttpException {

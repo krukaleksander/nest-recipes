@@ -20,7 +20,7 @@ export class RecipesController {
     return this.recipesService.getAllRecipes(query);
   }
   @Get('/time')
-  getRecipesByTime(@Body() body): IRecipe[] {
+  getRecipesByTime(@Body() body): Promise<IRecipe[]> {
     return this.recipesService.getRecipesByTime(body);
   }
   @Get('/single')
