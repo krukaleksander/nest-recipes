@@ -14,7 +14,9 @@ export class RecipesController {
     return this.recipesService.getListOfIngredientsTypes();
   }
   @Get('/')
-  getAllRecipes(@Query() query: IPagination): IRecipe[] | HttpException {
+  getAllRecipes(
+    @Query() query: IPagination,
+  ): Promise<IRecipe[] | HttpException> {
     return this.recipesService.getAllRecipes(query);
   }
   @Get('/time')

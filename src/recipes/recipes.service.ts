@@ -1,5 +1,7 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { MockDB } from '../helpers/MockDB';
+import { Repository } from 'typeorm';
+import { Recipe } from '../database/entities/Recipe.entity';
 import { getIngredients } from './helpers/getIngredients';
 import { IPagination, IRecipe } from '../interfaces';
 import { getRecipes } from './helpers/getRecipes';
@@ -8,6 +10,10 @@ import { getRecipeByID } from './helpers/getRecipeByID';
 
 @Injectable()
 export class RecipesService {
+  constructor(
+    @Inject('RECIPE_REPOSITORY')
+    private recipeRepository: Repository<Recipe>,
+  ) {}
   getListOfUniqueIngredients(): string[] {
     return getIngredients(MockDB, 'name');
   }
@@ -16,9 +22,15 @@ export class RecipesService {
     return getIngredients(MockDB, 'type');
   }
 
-  getAllRecipes(query: IPagination): IRecipe[] | HttpException {
+  async getAllRecipes(query: IPagination): Promise<IRecipe[] | HttpException> {
     const { limit, page } = query;
-    return getRecipes(limit, page, MockDB);
+    let db;
+    try {
+      db = await this.recipeRepository.find({ relations: ['ingredients'] });
+    } catch (error) {
+      throw error;
+    }
+    return getRecipes(limit, page, db);
   }
 
   getRecipesByTime(body): IRecipe[] {
