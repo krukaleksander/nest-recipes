@@ -44,9 +44,9 @@ describe('Recipes (e2e)', () => {
       'Baking',
       'Condiments',
       'Drinks',
+      'Dairy',
       'Produce',
       'Misc',
-      'Dairy',
     ];
     it('should return status 200', () => {
       return request(app.getHttpServer()).get(endpoint).expect(200);
