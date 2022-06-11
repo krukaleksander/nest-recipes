@@ -17,7 +17,6 @@ export class DataInitService implements OnApplicationBootstrap {
           await this.recipeRepository.save(recipe);
         }),
       );
-      await this.recipeRepository.save(MockDB[0]);
     } catch (error) {
       throw error;
     }
