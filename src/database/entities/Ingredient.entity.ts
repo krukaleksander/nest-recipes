@@ -2,8 +2,8 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  JoinTable,
-  ManyToMany,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import { Recipe } from './Recipe.entity';
 
@@ -11,15 +11,13 @@ import { Recipe } from './Recipe.entity';
 export class Ingredient {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column({ unique: true })
+  @Column()
   name: string;
   @Column()
   quantity: string;
   @Column()
   type: string;
-  @ManyToMany(() => Recipe, (recipe) => recipe.ingredients, {
-    cascade: true,
-  })
-  @JoinTable()
-  recipe: Recipe[];
+  @ManyToOne(() => Recipe, (recipe) => recipe.ingredients)
+  @JoinColumn({ referencedColumnName: 'id', name: 'recipeId' })
+  recipe: Recipe;
 }

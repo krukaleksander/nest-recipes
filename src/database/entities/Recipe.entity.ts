@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { IRecipe } from '../../interfaces';
 import { Ingredient } from './Ingredient.entity';
 
@@ -16,6 +16,8 @@ export class Recipe implements IRecipe {
   timers: number[];
   @Column({ nullable: true })
   originalURL?: string;
-  @ManyToMany(() => Ingredient, (ingredient) => ingredient.recipe)
+  @OneToMany(() => Ingredient, (inverseSide) => inverseSide.recipe, {
+    cascade: true,
+  })
   ingredients: Ingredient[];
 }
