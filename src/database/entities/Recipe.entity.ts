@@ -10,11 +10,11 @@ export class Recipe implements IRecipe {
   imageURL: string;
   @Column({ unique: true })
   name: string;
-  @Column()
+  @Column('text', { array: true })
   steps: string[];
-  @Column()
+  @Column('int', { array: true })
   timers: number[];
-  @Column()
+  @Column({ nullable: true })
   originalURL?: string;
   @ManyToMany(() => Ingredient, (ingredient) => ingredient.recipe)
   ingredients: Ingredient[];
