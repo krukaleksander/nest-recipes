@@ -7,23 +7,8 @@ import { getRecipes } from './helpers/getRecipes';
 import { getRecipesDoNotExceed } from './helpers/getRecipesDoNotExceed';
 import { getRecipeByID } from './helpers/getRecipeByID';
 import { Ingredient } from '../database/entities/Ingredient.entity';
-import { IngredientDto, RecipeDto } from './dto';
-
-function filterRecipesWith(products: string[], recipes: RecipeDto[]) {
-  let result = recipes;
-  products.forEach(
-    (product: string) =>
-      (result = result.filter((recipe: RecipeDto) => {
-        if (
-          recipe.ingredients.filter(
-            (ingredient: IngredientDto) => ingredient.name === product,
-          ).length > 0
-        )
-          return true;
-      })),
-  );
-  return Promise.resolve(result);
-}
+import { RecipeDto } from './dto';
+import { filterRecipesWith } from './helpers/filterRecipesWith';
 
 @Injectable()
 export class RecipesService {
