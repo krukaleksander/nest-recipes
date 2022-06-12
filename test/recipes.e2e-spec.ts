@@ -62,7 +62,7 @@ describe('Recipes (e2e)', () => {
     });
     it('should match array of ingredient types', async () => {
       const { body: response } = await getFromServer(endpoint);
-      expect(response).toEqual(ingredientsTypes);
+      expect(response.sort()).toMatchObject(ingredientsTypes.sort());
     });
   });
   describe('/recipes (GET)', () => {
