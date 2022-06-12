@@ -135,4 +135,13 @@ describe('Recipes (e2e)', () => {
       expect(response.statusCode).toEqual(204);
     });
   });
+  describe('/recipes/byproduct (GET)', () => {
+    const endpoint = '/recipes/byproduct';
+    it('should return recipes with given single product', async () => {
+      const { body: response } = await getFromServer(endpoint, {
+        products: ['olive oil'],
+      });
+      expect(response).toMatchSnapshot();
+    });
+  });
 });
