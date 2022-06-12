@@ -94,12 +94,11 @@ describe('Recipes (e2e)', () => {
     });
     it('should return elements at index 4, 5, 6 and 7 if limit 4 and page 2', async () => {
       const response = await getFromServer(`${endpoint}?limit=4&page=2`);
-      expect(response.body).toMatchObject([
-        { id: 5 },
-        { id: 6 },
-        { id: 7 },
-        { id: 8 },
-      ]);
+      expect(response.body.sort((a, b) => a.id - b.id)).toMatchObject(
+        [{ id: 5 }, { id: 6 }, { id: 7 }, { id: 8 }].sort(
+          (a, b) => a.id - b.id,
+        ),
+      );
     });
   });
   describe('/recipes/time (GET)', () => {
