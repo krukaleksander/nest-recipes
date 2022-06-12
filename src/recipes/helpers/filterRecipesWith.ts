@@ -7,11 +7,11 @@ export function filterRecipesWith(products: string[], recipes: RecipeDto[]) {
       (result = result.filter((recipe: RecipeDto) => {
         if (
           recipe.ingredients.filter(
-            (ingredient: IngredientDto) => ingredient.name === product
+            (ingredient: IngredientDto) => ingredient.name === product,
           ).length > 0
         )
           return true;
-      }))
+      })),
   );
   return Promise.resolve(result);
 }
