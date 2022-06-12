@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
 import { RecipesModule } from '../src/recipes/recipes.module';
 import * as superagent from 'superagent';
@@ -16,6 +16,7 @@ describe('Recipes (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    app.useGlobalPipes(new ValidationPipe());
     await app.init();
   });
   beforeAll(function createCustomMethods() {
@@ -140,6 +141,12 @@ describe('Recipes (e2e)', () => {
     it('should return recipes with given single product', async () => {
       const { body: response } = await getFromServer(endpoint, {
         products: ['olive oil'],
+      });
+      expect(response).toMatchSnapshot();
+    });
+    it('should return recipes with given two products', async () => {
+      const { body: response } = await getFromServer(endpoint, {
+        products: ['olive oil', 'salt'],
       });
       expect(response).toMatchSnapshot();
     });
