@@ -1,6 +1,7 @@
 import { Body, Controller, Get, HttpException, Query } from '@nestjs/common';
 import { RecipesService } from './recipes.service';
-import { IPagination, IRecipe } from '../interfaces';
+import { IPagination } from '../interfaces';
+import { RecipeDto } from './dto';
 
 @Controller('recipes')
 export class RecipesController {
@@ -16,19 +17,19 @@ export class RecipesController {
   @Get('/')
   getAllRecipes(
     @Query() query: IPagination,
-  ): Promise<IRecipe[] | HttpException> {
+  ): Promise<RecipeDto[] | HttpException> {
     return this.recipesService.getAllRecipes(query);
   }
   @Get('/time')
-  getRecipesByTime(@Body() body): Promise<IRecipe[]> {
+  getRecipesByTime(@Body() body): Promise<RecipeDto[]> {
     return this.recipesService.getRecipesByTime(body);
   }
   @Get('/single')
-  getSingleRecipe(@Body() body): Promise<IRecipe[] | HttpException> {
+  getSingleRecipe(@Body() body): Promise<RecipeDto[] | HttpException> {
     return this.recipesService.getSingleRecipe(body);
   }
   @Get('/byproduct')
-  getRecipesByProduct(@Body() body): Promise<IRecipe[] | HttpException> {
+  getRecipesByProduct(@Body() body): Promise<RecipeDto[] | HttpException> {
     return this.recipesService.getRecipesByProduct(body);
   }
 }
