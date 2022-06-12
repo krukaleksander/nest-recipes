@@ -27,4 +27,8 @@ export class RecipesController {
   getSingleRecipe(@Body() body): Promise<IRecipe[] | HttpException> {
     return this.recipesService.getSingleRecipe(body);
   }
+  @Get('/byproduct')
+  getRecipesByProduct(@Body() body): Promise<IRecipe[] | HttpException> {
+    return this.recipesService.getRecipesByProduct(body);
+  }
 }
