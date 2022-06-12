@@ -10,6 +10,7 @@ import { Ingredient } from '../database/entities/Ingredient.entity';
 import { RecipeDto } from './dto';
 import { filterRecipesWith } from './helpers/filterRecipesWith';
 import { getRecipeDB } from './helpers/getRecipeDB';
+import { getIngredientDB } from './helpers/getIngredientDB';
 
 @Injectable()
 export class RecipesService {
@@ -20,22 +21,12 @@ export class RecipesService {
     private ingredientRepository: Repository<Ingredient>,
   ) {}
   async getListOfUniqueIngredients(): Promise<string[]> {
-    let ingredients;
-    try {
-      ingredients = await this.ingredientRepository.find();
-    } catch (error) {
-      throw error;
-    }
+    const ingredients = await getIngredientDB(this.ingredientRepository);
     return getIngredients(ingredients, 'name');
   }
 
   async getListOfIngredientsTypes(): Promise<string[]> {
-    let ingredients;
-    try {
-      ingredients = await this.ingredientRepository.find();
-    } catch (error) {
-      throw error;
-    }
+    const ingredients = await getIngredientDB(this.ingredientRepository);
     return getIngredients(ingredients, 'type');
   }
 
