@@ -10,7 +10,7 @@ export class DataInitService implements OnApplicationBootstrap {
     private recipeRepository: Repository<Recipe>,
   ) {}
   async onApplicationBootstrap() {
-    console.log('app is starting');
+    console.log('Initialize migration...');
     try {
       await Promise.all(
         MockDB.map(async (recipe: IRecipe) => {
