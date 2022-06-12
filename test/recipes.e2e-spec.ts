@@ -148,7 +148,7 @@ describe('Recipes (e2e)', () => {
       const { body: response } = await getFromServer(endpoint, {
         products: ['olive oil', 'salt'],
       });
-      expect(response).toMatchSnapshot();
+      expect(response).toHaveLength(0);
     });
   });
 });
