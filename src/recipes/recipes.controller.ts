@@ -24,7 +24,7 @@ export class RecipesController {
     return this.recipesService.getRecipesByTime(body);
   }
   @Get('/single')
-  getSingleRecipe(@Body() body): IRecipe[] | HttpException {
+  getSingleRecipe(@Body() body): Promise<IRecipe[] | HttpException> {
     return this.recipesService.getSingleRecipe(body);
   }
 }

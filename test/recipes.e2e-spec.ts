@@ -127,7 +127,7 @@ describe('Recipes (e2e)', () => {
       return request(app.getHttpServer()).get(endpoint).expect(204);
     });
     it('should return one element if valid id is passed', async () => {
-      const { body: response } = await getFromServer(endpoint, { id: 0 });
+      const { body: response } = await getFromServer(endpoint, { id: 1 });
       expect(response).toHaveLength(1);
     });
     it('should return 204 no content if id is not in db', async () => {
