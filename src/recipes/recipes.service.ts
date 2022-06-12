@@ -10,11 +10,12 @@ import { Ingredient } from '../database/entities/Ingredient.entity';
 import { RecipeDto } from './dto';
 import { filterRecipesWith } from './helpers/filterRecipesWith';
 
-function getRecipeDB(repository: Repository<Recipe>) {
+function getRecipeDB(repository: Repository<Recipe>, id?: number) {
   try {
     return Promise.resolve(
       repository.find({
         relations: ['ingredients'],
+        where: { id },
       }),
     );
   } catch (error) {
@@ -73,15 +74,7 @@ export class RecipesService {
 
   async getSingleRecipe(body): Promise<RecipeDto[] | HttpException> {
     const { id } = body;
-    let recipes: RecipeDto[];
-    try {
-      recipes = await this.recipeRepository.find({
-        relations: ['ingredients'],
-        where: { id: id },
-      });
-    } catch (error) {
-      throw error;
-    }
+    const recipes = await getRecipeDB(this.recipeRepository, id);
     return getRecipeByID(recipes, id);
   }
 
