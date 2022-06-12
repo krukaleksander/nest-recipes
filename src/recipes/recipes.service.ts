@@ -1,5 +1,5 @@
 import { HttpException, Inject, Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Recipe } from '../database/entities/Recipe.entity';
 import { getIngredients } from './helpers/getIngredients';
 import { IPagination, IRecipe } from '../interfaces';
@@ -74,5 +74,19 @@ export class RecipesService {
       throw error;
     }
     return getRecipeByID(recipes, id);
+  }
+
+  async getRecipesByProduct(body) {
+    const { products } = body;
+    let recipes;
+    try {
+      recipes = await this.recipeRepository.find({
+        relations: ['ingredients'],
+        where: { ingredients: { name: In(products) } },
+      });
+    } catch (error) {
+      throw error;
+    }
+    return recipes;
   }
 }
