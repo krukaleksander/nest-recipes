@@ -9,19 +9,7 @@ import { getRecipeByID } from './helpers/getRecipeByID';
 import { Ingredient } from '../database/entities/Ingredient.entity';
 import { RecipeDto } from './dto';
 import { filterRecipesWith } from './helpers/filterRecipesWith';
-
-function getRecipeDB(repository: Repository<Recipe>, id?: number) {
-  try {
-    return Promise.resolve(
-      repository.find({
-        relations: ['ingredients'],
-        where: { id },
-      }),
-    );
-  } catch (error) {
-    throw error;
-  }
-}
+import { getRecipeDB } from './helpers/getRecipeDB';
 
 @Injectable()
 export class RecipesService {
