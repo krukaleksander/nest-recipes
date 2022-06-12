@@ -10,6 +10,18 @@ import { Ingredient } from '../database/entities/Ingredient.entity';
 import { RecipeDto } from './dto';
 import { filterRecipesWith } from './helpers/filterRecipesWith';
 
+function getRecipeDB(repository: Repository<Recipe>) {
+  try {
+    return Promise.resolve(
+      repository.find({
+        relations: ['ingredients'],
+      }),
+    );
+  } catch (error) {
+    throw error;
+  }
+}
+
 @Injectable()
 export class RecipesService {
   constructor(
@@ -55,14 +67,7 @@ export class RecipesService {
 
   async getRecipesByTime(body): Promise<RecipeDto[]> {
     const { time } = body;
-    let recipes;
-    try {
-      recipes = await this.recipeRepository.find({
-        relations: ['ingredients'],
-      });
-    } catch (error) {
-      throw error;
-    }
+    const recipes = await getRecipeDB(this.recipeRepository);
     return getRecipesDoNotExceed(time, recipes);
   }
 
@@ -82,14 +87,7 @@ export class RecipesService {
 
   async getRecipesByProduct(body) {
     const { products } = body;
-    let recipes: RecipeDto[];
-    try {
-      recipes = await this.recipeRepository.find({
-        relations: ['ingredients'],
-      });
-    } catch (error) {
-      throw error;
-    }
+    const recipes = await getRecipeDB(this.recipeRepository);
     return filterRecipesWith(products, recipes);
   }
 }
