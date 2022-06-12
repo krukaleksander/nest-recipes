@@ -88,9 +88,9 @@ describe('Recipes (e2e)', () => {
         message: 'page out of range',
       });
     });
-    it('should return elements at index 4 and 5 if limit 2 and page 3', async () => {
+    it('should return 2 elements if limit 2 and page 3', async () => {
       const response = await getFromServer(`${endpoint}?limit=2&page=3`);
-      expect(response.body).toMatchObject([{ id: 5 }, { id: 6 }]);
+      expect(response.body).toHaveLength(2);
     });
     it('should return elements at index 4, 5, 6 and 7 if limit 4 and page 2', async () => {
       const response = await getFromServer(`${endpoint}?limit=4&page=2`);
@@ -141,7 +141,7 @@ describe('Recipes (e2e)', () => {
       const { body: response } = await getFromServer(endpoint, {
         products: ['olive oil'],
       });
-      expect(response).toMatchSnapshot();
+      expect(response[0].name).toBe('Roasted Asparagus');
     });
     it('should return recipes with given two products', async () => {
       const { body: response } = await getFromServer(endpoint, {
