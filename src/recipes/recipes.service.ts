@@ -55,14 +55,7 @@ export class RecipesService {
     query: IPagination,
   ): Promise<RecipeDto[] | HttpException> {
     const { limit, page } = query;
-    let recipes;
-    try {
-      recipes = await this.recipeRepository.find({
-        relations: ['ingredients'],
-      });
-    } catch (error) {
-      throw error;
-    }
+    const recipes = await getRecipeDB(this.recipeRepository);
     return getRecipes(limit, page, recipes);
   }
 
