@@ -1,12 +1,12 @@
-import { IRecipe } from '../../interfaces';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { chunkArray } from './chunkArray';
+import { RecipeDto } from '../dto';
 
 export function getRecipes(
   limit: string,
   page: string,
-  database: IRecipe[],
-): IRecipe[] | HttpException {
+  database: RecipeDto[],
+): RecipeDto[] | HttpException {
   const limitNumber = +limit;
   const pageNumber = +page;
   const isPageInRange = database.length / limitNumber > pageNumber - 1;

@@ -2,7 +2,7 @@ import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Recipe } from '../database/entities/Recipe.entity';
 import { getIngredients } from './helpers/getIngredients';
-import { IPagination, IRecipe } from '../interfaces';
+import { IPagination } from '../interfaces';
 import { getRecipes } from './helpers/getRecipes';
 import { getRecipesDoNotExceed } from './helpers/getRecipesDoNotExceed';
 import { getRecipeByID } from './helpers/getRecipeByID';
@@ -38,7 +38,9 @@ export class RecipesService {
     return getIngredients(ingredients, 'type');
   }
 
-  async getAllRecipes(query: IPagination): Promise<IRecipe[] | HttpException> {
+  async getAllRecipes(
+    query: IPagination,
+  ): Promise<RecipeDto[] | HttpException> {
     const { limit, page } = query;
     let recipes;
     try {
@@ -51,7 +53,7 @@ export class RecipesService {
     return getRecipes(limit, page, recipes);
   }
 
-  async getRecipesByTime(body): Promise<IRecipe[]> {
+  async getRecipesByTime(body): Promise<RecipeDto[]> {
     const { time } = body;
     let recipes;
     try {
@@ -64,9 +66,9 @@ export class RecipesService {
     return getRecipesDoNotExceed(time, recipes);
   }
 
-  async getSingleRecipe(body): Promise<IRecipe[] | HttpException> {
+  async getSingleRecipe(body): Promise<RecipeDto[] | HttpException> {
     const { id } = body;
-    let recipes;
+    let recipes: RecipeDto[];
     try {
       recipes = await this.recipeRepository.find({
         relations: ['ingredients'],

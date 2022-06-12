@@ -1,4 +1,3 @@
-import { IRecipe } from '../../interfaces';
 import { IngredientDto } from './IngredientDto';
 import {
   IsArray,
@@ -8,7 +7,7 @@ import {
   IsString,
 } from 'class-validator';
 
-export class RecipeDto implements IRecipe {
+export class RecipeDto {
   @IsNumber()
   @IsNotEmpty()
   id: number;

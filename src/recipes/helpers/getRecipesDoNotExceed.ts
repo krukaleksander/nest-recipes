@@ -1,10 +1,11 @@
 import { IRecipe } from '../../interfaces';
 import { sumTheArray } from './sumTheArray';
+import { RecipeDto } from '../dto';
 
 export function getRecipesDoNotExceed(
   time: number,
-  recipes: IRecipe[],
-): IRecipe[] {
+  recipes: RecipeDto[],
+): RecipeDto[] {
   const result = [];
   recipes.forEach((recipe: IRecipe) => {
     if (sumTheArray(recipe.timers) <= time) {
