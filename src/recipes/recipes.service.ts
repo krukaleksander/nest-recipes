@@ -62,8 +62,17 @@ export class RecipesService {
     return getRecipesDoNotExceed(time, recipes);
   }
 
-  getSingleRecipe(body): IRecipe[] | HttpException {
+  async getSingleRecipe(body): Promise<IRecipe[] | HttpException> {
     const { id } = body;
-    return getRecipeByID(id);
+    let recipes;
+    try {
+      recipes = await this.recipeRepository.find({
+        relations: ['ingredients'],
+        where: { id: id },
+      });
+    } catch (error) {
+      throw error;
+    }
+    return getRecipeByID(recipes, id);
   }
 }
